@@ -1,6 +1,6 @@
 <template>
   <div class="container" v-bind:style="{backgroundColor: bg_color, borderColor: border_color }">
-    <img :src="img_src" alt="product_image" width="130" height="100">
+    <img :src="img_src" alt="product_image" width="110px" height="110px">
     <div class="label">{{ label }}</div>
     <div class="quantity">{{ quantity }} Items</div>
   </div>
@@ -34,16 +34,17 @@ export default {
 }
 
 .container .label{
+  -webkit-text-stroke: .2px black;
     font-weight: bold;
     color: black;
-    font-size: 1.5em;
+    font-size: 1em;
     margin-top: 1.3rem;
     font-family: "Roboto Mono", monospace;
   }
   
 .container .quantity{
     font-family: "Roboto Mono", monospace;
-    color: black;
+    color: black ;
     font-size: .6rem;
     margin-top: .7rem;
 }
