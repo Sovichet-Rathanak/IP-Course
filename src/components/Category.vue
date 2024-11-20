@@ -1,18 +1,18 @@
 <template>
-  <div class="container" v-bind:style="{backgroundColor: bg_color, borderColor: border_color }">
-    <img :src="img_src" alt="product_image" width="110px" height="110px">
-    <div class="label">{{ label }}</div>
-    <div class="quantity">{{ quantity }} Items</div>
+  <div class="container" v-bind:style="{backgroundColor: color, borderColor: border_color }">
+    <img :src="image" alt="product_image" width="110px" height="110px">
+    <div class="name">{{ name }}</div>
+    <div class="productCount">{{ productCount }} Items</div>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    img_src: String,
-    quantity: Number,
-    label: String,
-    bg_color: String,
+    name: String,
+    productCount: Number,
+    color: String,
+    image: String,
     border_color: String
   }
 };
@@ -33,7 +33,7 @@ export default {
   box-shadow: 10px 5px 15px grey;
 }
 
-.container .label{
+.container .name{
   -webkit-text-stroke: .2px black;
     font-weight: bold;
     color: black;
@@ -42,7 +42,7 @@ export default {
     font-family: "Roboto Mono", monospace;
   }
   
-.container .quantity{
+.container .productCount{
     font-family: "Roboto Mono", monospace;
     color: black ;
     font-size: .6rem;
