@@ -13,7 +13,8 @@ export default {
     productCount: Number,
     color: String,
     image: String,
-    border_color: String
+    border_color: String,
+    group: String
   }
 };
 </script>
