@@ -22,7 +22,7 @@ export default{
         image: String,
         name: String,
         rating: Number,
-        size: Number,
+        size: String,
         price: Number,
         group: String
     },

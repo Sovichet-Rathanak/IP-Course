@@ -10,21 +10,13 @@ export const useProductStore = defineStore("product", {
   }),
   getters: {
     //filter category by group
-    getCategoriesByGroup: (state) => (groupName) => {
-      return state.categories.filter((category) => category.group === groupName);
-    },
+    getCategoriesByGroup: (state) => {return (groupName) => state.categories.filter((category) => category.group === groupName)},
     //filter product by group
-    getProductsByGroup: (state) => (groupName) => {
-      return state.products.filter((product) => product.group === groupName);
-    },
+    getProductsByGroup: (state) => {return (groupName) => state.products.filter((product) => product.group === groupName)},
     //filter by category
-    getProductsByCategory: (state) => (categoryId) => {
-      return state.products.filter((product) => product.categoryId === categoryId);
-    },
+    getProductsByCategory: (state) => (categoryId) => {return state.products.filter((product) => product.categoryId === categoryId)},
     //filter product by popularity
-    getPopularProducts: (state) => () => {
-      return state.products.filter((product) => product.countSold > 10);
-    },
+    getPopularProducts: (state) => () => {return state.products.filter((product) => product.countSold > 10)},
   },
   actions: {
     async fetchCategories() {

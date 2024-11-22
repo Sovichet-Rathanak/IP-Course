@@ -25,6 +25,7 @@ button {
 
 button:hover {
   background-color: orange;
+  cursor: pointer;
 }
 
 .container {

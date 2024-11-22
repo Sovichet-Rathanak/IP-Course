@@ -5,7 +5,7 @@
 
   <div class="cat_container">
     <Category
-      v-for="product in categories"
+      v-for="product in categoriesByGroup"
       key="product.label"
       :image="product.image"
       :name="product.name"
@@ -13,7 +13,7 @@
       :color="product.color"
       :border_color="product.color"
       :group="product.group"
-    />
+    ></Category>
   </div>
 
   <div class="promo_container">
@@ -58,8 +58,7 @@ export default {
     const store = useProductStore();
     return {
       store,
-      section1: "Featured Categories",
-      section2: "Popular Products",
+      currentGroupName: "Fruits"
     };
   },
   components: {
@@ -68,33 +67,30 @@ export default {
     PopularProduct,
     Menu,
   },
-  data() {
-    return {};
-  },
   async mounted() {
     // fetch data from backend
     await this.store.fetchCategories();
     await this.store.fetchPromotions();
     await this.store.fetchProducts();
   },
-  methods: {},
   computed: {
     ...mapState(useProductStore, {
       categories: "categories",
       products: "products",
       promotions: "promotions",
       popProducts: "getPopularProducts",
+      categoriesByGroup(store) {
+        return store.getCategoriesByGroup(this.currentGroupName);
+      },
+      productsByGroup(store) {
+        return store.getProductsByGroup(this.currentGroupName);
+      },
+      productsByCategory(store) {
+        return store.getProductsByCategory(this.currentGroupName);
+      },
     }),
-    categoriesByGroup(store) {
-      return this.store.getCategoriesByGroup(this.currentGroupName);
-    },
-    productsByGroup(store) {
-      return this.store.getProductsByGroup(this.currentGroupName);
-    },
-    productsByCategory(store) {
-      return this.store.getProductsByCategory(this.currentCategoryId);
-    },
   },
+  methods:{}
 };
 </script>
 

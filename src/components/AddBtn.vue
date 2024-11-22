@@ -21,4 +21,8 @@
         border-radius: 5px;
         border: none;
     }
+
+    button:hover{
+        cursor: pointer;
+    }
 </style>
