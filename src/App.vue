@@ -1,6 +1,6 @@
 <template>
   <div class="menu_container">
-    <Menu :title="section1" :onMilk="categoriesByGroup"></Menu>
+    <Menu title="Featured Products" :navList="groups"></Menu>
   </div>
 
   <div class="cat_container">
@@ -28,12 +28,12 @@
   </div>
 
   <div class="menu_container">
-    <Menu :title="section2"></Menu>
+    <Menu title="Popular Products" :navList="groups" @change-nav="changeProductGroup"></Menu>
   </div>
 
   <div class="popproduct_container">
     <PopularProduct
-      v-for="prod in products"
+      v-for="prod in productsByGroup"
       :image="prod.image"
       :name="prod.name"
       :rating="prod.rating"
@@ -72,9 +72,12 @@ export default {
     await this.store.fetchCategories();
     await this.store.fetchPromotions();
     await this.store.fetchProducts();
+    await this.store.fetchGroup();
+    console.log(this.store.groups);
   },
   computed: {
     ...mapState(useProductStore, {
+      groups: "groups",
       categories: "categories",
       products: "products",
       promotions: "promotions",
@@ -83,14 +86,19 @@ export default {
         return store.getCategoriesByGroup(this.currentGroupName);
       },
       productsByGroup(store) {
-        return store.getProductsByGroup(this.currentGroupName);
+        return store.getProductsByGroup();
       },
       productsByCategory(store) {
         return store.getProductsByCategory(this.currentGroupName);
       },
     }),
   },
-  methods:{}
+  methods:{
+    changeProductGroup(nav){
+      this.store.currProductGroup = nav;
+    }
+
+  }
 };
 </script>
 

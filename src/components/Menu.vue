@@ -1,61 +1,84 @@
 <template>
-    <div class="container">
-        <h1 class="title">{{ title }}</h1>
-        <div class="btn_container">
-            <button @click="onAll">All</button>
-            <button @click="onMilk">Milk & Dairies</button>
-            <button @click="onCoff">Coffee & Teas</button>
-            <button @click="onPet">Pet Food</button>
-            <button @click="onMeat">Meat</button>
-            <button @click="onVeg">Vegetables</button>
-            <button @click="onFruit">Fruits</button>
-        </div>
+<div class="menu">
+    <h1 class="quicksand-regular">{{ title }}</h1>
+    <div class="navs">
+        <p @click="setCurrNav('All')">All</p>
+        <template v-for="nav in navList">
+            <p @click.prevent="setCurrNav(nav)" :class="[activeTab === nav ? 'lato-bold' : 'lato-regular']">
+                {{nav}}
+            </p>
+        </template>
     </div>
+</div>
 </template>
-
 <script>
-export default{
-    props:{
+import { useProductStore } from '@/stores/product';
+export default {
+    setup() {
+        const store = useProductStore()
+        return {
+            store
+        }
+    },
+    props: {
+        navList: Array,
         title: String,
-        onAll: Function,
-        onMilk: Function,
-        onCoff: Function,
-        onPet: Function,
-        onMeat: Function,
-        onVeg: Function,
-        onFruit: Function
-    }
+    },
+    data() {
+        return {
+            activeTab: "All",
+            navs: this.navList
+        }
+    },
+    methods: {
+        setCurrNav(nav) {
+            this.activeTab = nav
+            this.$emit("change-nav", nav)
+        }
+    },
+    computed: {
+        coolList() {
+            const newList = [...this.navs]
+            newList.unshift("All")
+            return newList
+        }
+    },
 }
 </script>
-
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
-
-    .container{
-        display: flex;
-        flex-direction: row;
-        justify-content:space-between;
-        font-family: "Roboto Mono", monospace;
-        margin: 0;
-    }
-
-    h1{
-        margin: 0;
-    }
-
-    button{
-        padding: 1em;
-        background-color: transparent;
-        border: none;
-        font-family: "Roboto Mono", monospace;
-    }
-
-    button:hover{
-        font-weight: bold;
-    }
-
-    button:active{
-        font-weight: bold;
-        color: blue;
-    }
+/* Lato font */
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+/* Quicksand font */
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Quicksand:wght@300..700&display=swap");
+/* Montserat */
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&display=swap");
+.quicksand-regular {
+    font-family: "Quicksand", serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+.lato-bold {
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
+.lato-regular {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px 0 16px;
+}
+.menu > .navs {
+    display: flex;
+    column-gap: 20px;
+}
+.navs > p {
+    cursor: pointer;
+}
 </style>

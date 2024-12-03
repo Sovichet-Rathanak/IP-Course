@@ -3,12 +3,12 @@
         <div class="body_container">
             <img :src="image" alt="popular product image" width="201.89px" height="144.93px">
             <div class="org_name">Hodo Food</div>
-            <div class="name">{{ name }} Food Name Exp</div>
+            <div class="name">{{ name }} Food Name Exp</div>    
             <div class="rating">({{ rating }})</div>
             <div class="size">{{ size }} gram</div>
             <div class="footer_container">
                 <div class="price">${{ price }}</div>
-                <AddBtn></AddBtn>
+                    <AddBtn></AddBtn>
             </div>
         </div>
     </div>
