@@ -7,16 +7,33 @@ export const useProductStore = defineStore("product", {
     promotions: [],
     categories: [],
     products: [],
+    currProductGroup: "All",
   }),
   getters: {
     //filter category by group
-    getCategoriesByGroup: (state) => {return (groupName) => state.categories.filter((category) => category.group === groupName)},
-    //filter product by group
-    getProductsByGroup: (state) => {return (groupName) => state.products.filter((product) => product.group === groupName)},
+    getCategoriesByGroup: (state) => {
+      return (groupName) =>
+        state.categories.filter((category) => category.group === groupName);
+    },
     //filter by category
-    getProductsByCategory: (state) => (categoryId) => {return state.products.filter((product) => product.categoryId === categoryId)},
+    getProductsByCategory: (state) => (categoryId) => {
+      return state.products.filter(
+        (product) => product.categoryId === categoryId
+      );
+    },
     //filter product by popularity
-    getPopularProducts: (state) => () => {return state.products.filter((product) => product.countSold > 10)},
+    getPopularProducts: (state) => () => {
+      return state.products.filter((product) => product.countSold > 10);
+    },
+    getProductsByGroup() {
+      return () => {
+        if (this.currProductGroup === "All") return this.products;
+
+        return this.products.filter(
+          (product) => product.group === this.currProductGroup
+        );
+      };
+    },
   },
   actions: {
     async fetchCategories() {
@@ -32,6 +49,11 @@ export const useProductStore = defineStore("product", {
     async fetchProducts() {
       await axios.get("http://localhost:3000/api/products").then((res) => {
         this.products = res.data;
+      });
+    },
+    async fetchGroup() {
+      await axios.get("http://localhost:3000/api/groups").then((res) => {
+        this.groups = res.data;
       });
     },
   },
