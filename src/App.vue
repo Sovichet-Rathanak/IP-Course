@@ -1,4 +1,5 @@
 <template>
+  <SearchBox></SearchBox>
   <div class="menu_container">
     <Menu :title="section1" :onMilk="categoriesByGroup"></Menu>
   </div>
@@ -46,6 +47,7 @@
 
 <script>
 import axios from "axios";
+import SearchBox from "./components/SearchBox.vue"
 import useProductStore from "./stores/product.js";
 import Category from "./components/Category.vue";
 import Promotion from "./components/Promotion.vue";
@@ -66,6 +68,7 @@ export default {
     Promotion,
     PopularProduct,
     Menu,
+    SearchBox
   },
   async mounted() {
     // fetch data from backend
