@@ -15,6 +15,7 @@
         </div>
         <nav>
             <div class="hot">
+                <iconify-icon icon="mdi:fire" width="24px" height="24px" />
                 <button>Hot Deals</button>
             </div>
             <button>Home</button>
@@ -85,6 +86,8 @@
     .hot{
         display: flex;
         justify-content: center;
+        align-items: center;
+        color: #3BB77E;
     }
     
     .hot > button{

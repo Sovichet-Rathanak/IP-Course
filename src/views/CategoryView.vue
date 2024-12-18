@@ -1,6 +1,16 @@
 <template>
-    <h1>Category Page</h1>
+    <PageHeader></PageHeader>
 </template>
 
 <script>
+import PageHeader from "../components/PageHeader.vue"
+
+export default{
+    components:{
+        PageHeader
+    }
+}
 </script>
+
+<style>
+</style>

@@ -1,6 +1,5 @@
 <template>
     <div class="banner-container">
-        <img src="../assets/images/bannerBG.png" alt="banner_img">
         <div class="left">
             <hgroup>
                 <h1>Don't miss amazing <br> grocery deals</h1>
@@ -22,23 +21,17 @@
 <style scoped>
     .banner-container{
         height: 538px;
-        width: 1584px;
+        width: 100%;
         display: flex;
-        flex-direction: row;
-    }
-
-    .banner-container > img{
-        position: absolute;
-        z-index: -100;
+        flex-direction: row;    
+        background-image: url("../assets/images/bannerBG.png");
         background-color: #FDC04033;
         border-radius: 30px;
-        display: flex;
-        height: 538px;
+        z-index: -100;
     }
 
     .right > img{
         position: absolute;
-        z-index: -90;
         width: 895px;
         height: 590px;
         right: 50px;
