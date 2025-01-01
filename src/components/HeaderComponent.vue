@@ -1,6 +1,6 @@
 <template>
   <div class="header-container">
-    <button>Home</button>    
+    <button><router-link to="/" class="link-button">Home</router-link></button>    
     <div class="usernav">
       <router-link
         v-for="page in pages"
@@ -54,11 +54,12 @@ export default {
   gap: 1rem;
 }
 
-.link-button {
+.link-button{
   text-decoration: none;
+  color: black;
 }
 
-.link-button button {
+.link-button button{
   font-family: 'Inter', sans-serif;
   font-size: 20px;
   border: none;

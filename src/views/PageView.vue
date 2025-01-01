@@ -1,6 +1,8 @@
 <template>
     <div>
-      <h1>{{ pageContent.title }}</h1>
+      <h1>Welcome to, {{ pageContent.title }}!</h1>
+      <hr>
+      <router-view/>
     </div>
   </template>
   

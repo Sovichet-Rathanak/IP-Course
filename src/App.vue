@@ -4,13 +4,21 @@
   </header>
 
   <body>
-    <div class="sidebar">
-      <h3>Menu</h3>
-      <div class="button" v-for="index in 4" :key="index">
-        <div>Section {{ index }}</div>
-      </div>
+    <nav>
+      <SidebarComponent></SidebarComponent>
+    </nav>
+    <h1>{{ currentPage }}</h1>
+    <div class="router-container">
+      <router-view></router-view>
+      <span v-for="(msg, index) in pageMessages" :key="index">
+        Message from {{ msg.page }}: {{ msg.message }}
+      </span>
+      <form class="message-form" @submit.prevent="saveMessage">
+        <label for="msg-input">Message</label>
+        <input class="msg-input" type="text" v-model="message">
+        <button type="submit">Save</button>
+      </form>
     </div>
-    <router-view></router-view>
   </body>
   <footer>
     <h1>Footer</h1>
@@ -19,45 +27,67 @@
 
 <script>
 import HeaderComponent from './components/HeaderComponent.vue';
+import SidebarComponent from './components/SidebarComponent.vue';
+import { useMessageStore } from '@/store/messageStore.js';
 
-export default{
-  components:{
-    HeaderComponent
-  }
-}
+export default {
+  data() {
+    return {
+      message: '',
+    };
+  },
+  components: {
+    HeaderComponent,
+    SidebarComponent,
+  },
+  computed: {
+    pageMessages() {
+      const store = useMessageStore();
+      return store.getMessages(this.$route.params.pageNumber);
+    },
+  },
+  methods: {
+    saveMessage() {
+      const store = useMessageStore();
+      store.setMessage(this.$route.params.pageNumber, this.message);
+      this.message = '';
+    },
+  },
+};
 </script>
 
 <style scoped>
-body{
+body {
   display: flex;
   flex-direction: row;
 }
 
-.sidebar{
-  width: fit-content;
-  height: 80vh;
-  border: 1px solid black;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.sidebar .button{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  border: 1px solid black;
-  width: 200px;
-  height: fit-content;
-}
-
-footer{
+footer {
   width: auto;
   border: 1px solid black;
   display: flex;
   justify-content: center;
 }
 
+.router-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.message-form {
+  font-family: 'Inter';
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.message-form button {
+  background-color: white;
+  border: 1px solid black;
+  height: 25px;
+  border-radius: 5px;
+}
 </style>
